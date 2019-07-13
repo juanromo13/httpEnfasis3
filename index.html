@@ -1,6 +1,3 @@
-<?php
-  require 'conexion.php';
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,16 +8,16 @@
 </head>
 <body>
   <center>
-  <form action="index.php" method="post">
+  <form action="procesar.php" method="post">
     <p>Mac fuente</p>
-    <input type="text"><br>
+    <input type="text" name="src"><br>
     <p>Mac destino</p>
-    <input type="text"><br>
+    <input type="text" name="dst"><br>
     <p>Hora inicio</p>
-    <input type="text"><br>
+    <input type="text" name="in"><br>
     <p>Hora fin</p>
-    <input type="text"><br><br>
-    <input type="button" name="" value="submit">
+    <input type="text" name="out"><br><br>
+    <input type="submit" value="Aceptar info">
   </form>
   <center>
 </body>
