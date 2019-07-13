@@ -1,13 +1,9 @@
 <?php
-function conectar()
-{
-  $user = "root";
+  $host = "localhost";
+  $usuario = "root";
   $pass = "";
-  $server = "localhost";
-  $db = "fitros";
-  $con = mysqli_connect($server,$user,$pass) or die ("Error al conectar a la base de datos".mysqli_error());
-  mysql_select_db($db,$con);
+  $db = "filtros";
 
-  return $con;
-}
+  $con = mysqli_connect($host,$usuario,$pass,$db);
+
 ?>
