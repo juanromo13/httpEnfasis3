@@ -3,7 +3,7 @@
 // Usamos esas variables:
   include("conexion.php");
 
-  if(isset($_POST["src"], $_POST["dst"], $_POST["in"], $_POST["out"]) and $_POST["src"] !="" and $_POST["dst"]!="" and $_POST["in"]!="" and $_POST["out"]!=""){
+  if(isset($_POST["src"], $_POST["dst"], $_POST["in"], $_POST["out"]) and $_POST["src"] !="" and $_POST["dst"]!=""){
 
     //traspasamos a variables locales, para evitar complicaciones con las comillas:
     $mac_src = $_POST['src'];
