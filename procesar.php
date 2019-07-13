@@ -17,6 +17,7 @@
 
     if($result){
       echo "<p>Registro agregado.</p>";
+      echo '<p>Volver<a href="index.html">formulario</a></p>';
     } else {
       echo "<p>No se agregó...</p>";
     }
