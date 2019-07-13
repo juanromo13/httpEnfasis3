@@ -9,6 +9,11 @@ from ryu.ofproto import ofproto_v1_3
 import time
 import MySQLdb
 
+db = MySQLdb.connect(host="localhost",    # tu host, usualmente localhost
+                     user="john",         # tu usuario
+                     passwd="megajonhy",  # tu password
+                     db="jonhydb")        # el nombre de la base de datos
+
 class TareaSwitchB(app_manager.RyuApp):
     OFP_VERSIONS = [ofproto_v1_3.OFP_VERSION]
 
