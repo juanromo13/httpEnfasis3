@@ -7,6 +7,19 @@ from ryu.controller.handler import CONFIG_DISPATCHER, MAIN_DISPATCHER
 from ryu.controller.handler import set_ev_cls
 from ryu.ofproto import ofproto_v1_3
 import time
+import mysql.connector
+
+mydb = mysql.connector.connect(host="localhost",user="root",passwd="",db="filtros")
+
+cur = mydb.cursor()
+
+cur.execute("SELECT * FROM reglas WHERE id_regla = (SELECT MAX(id_regla) from reglas )")
+
+row = cur.fetchone()
+mac_src = row[1]
+mac_dst = row[2]
+hora_ini = row[3]
+hora_fin = row[4]
 
 class TareaSwitchB(app_manager.RyuApp):
     OFP_VERSIONS = [ofproto_v1_3.OFP_VERSION]
@@ -51,17 +64,11 @@ class TareaSwitchB(app_manager.RyuApp):
         # construct action list.
         actions = [parser.OFPActionOutput(out_port)]
 
-        if src in "00:00:00:00:00:01" and dst in "00:00:00:00:00:19" or src in "00:00:00:00:00:01" and dst in "00:00:00:00:00:1a" or src in "00:00:00:00:00:01" and dst in "00:00:00:00:00:1b":
-            actions = []
-
         hora = int(time.strftime("%H"))
 
-        if src in "00:00:00:00:00:02" and dst in "00:00:00:00:00:16" or src in "00:00:00:00:00:02" and dst in "00:00:00:00:00:17" or src in "00:00:00:00:00:02" and dst in "00:00:00:00:00:18":
-            if hora == 10 or hora == 14 or hora == 15:
-                actions = [parser.OFPActionOutput(out_port)]
-            else:
+        if (hora<hora_ini or hora>=hora_fin):
+            if src in mac_src and dst in mac_dst:
                 actions = []
-
 
         # construct packet_out message and send it.
         out = parser.OFPPacketOut(datapath=datapath,
